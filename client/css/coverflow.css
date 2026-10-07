@@ -140,7 +140,7 @@
 }
 
 .coverflow-title {
-  font: 800 clamp(1.6rem, 3.2vw, 2.4rem) 'Syne', sans-serif;
+  font: 800 clamp(1.6rem, 3.2vw, 2.4rem) 'Sora', 'Plus Jakarta Sans', sans-serif;
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, #FFFFFF 0%, #E0F2FE 40%, #00D2FF 80%, #8B5CF6 100%);
   -webkit-background-clip: text;
