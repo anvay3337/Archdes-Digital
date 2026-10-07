@@ -75,6 +75,10 @@ async function sendInquiryEmail(payload) {
               <td style="padding: 6px 0; color: #00d2ff;"><a href="mailto:${payload.email}" style="color: #00d2ff; text-decoration: none;">${payload.email}</a></td>
             </tr>
             <tr>
+              <td style="padding: 6px 0; color: #94a3b8;"><strong>Phone:</strong></td>
+              <td style="padding: 6px 0; color: #ffffff; font-weight: 600;"><a href="tel:${payload.phone || ''}" style="color: #ffffff; text-decoration: none;">${payload.phone || 'N/A'}</a></td>
+            </tr>
+            <tr>
               <td style="padding: 6px 0; color: #94a3b8;"><strong>Budget:</strong></td>
               <td style="padding: 6px 0; color: #ff2e93; font-weight: 600;">${payload.budget}</td>
             </tr>

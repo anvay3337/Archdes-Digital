@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Sora:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap');
+
 /* ==========================================================================
    Archdes Digital — High-Concept Studio Theme
    Aesthetic Architecture:
@@ -56,11 +58,11 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--ink);
-  font: 400 1.05rem / 1.65 'Manrope', system-ui, sans-serif;
+  font: 400 1.05rem / 1.65 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
 }
 
-h1, h2, h3, .logo {
+h1, h2, h3 {
   font-family: 'Syne', sans-serif;
   line-height: 1.08;
 }
@@ -281,17 +283,31 @@ button[type="submit"]:disabled {
    ========================================================================== */
 section.swirl {
   min-height: 100vh;
-  padding: 9rem 7vw 6rem clamp(190px, 19vw, 290px);
+  padding: 8.5rem 6vw 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1.6rem;
-  max-width: 1440px;
+  max-width: 1280px;
+  margin: 0 auto;
   box-sizing: border-box;
   transform: translateY(28px);
   opacity: 0;
   filter: blur(4px);
   transition: transform 0.9s cubic-bezier(0.16, 0.9, 0.2, 1), opacity 0.8s ease, filter 0.8s ease;
+}
+
+section.swirl.full-bleed {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+section.swirl.full-bleed h2,
+section.swirl.full-bleed .sub {
+  padding-left: 6vw;
+  padding-right: 6vw;
 }
 
 section.swirl.in {
@@ -608,61 +624,7 @@ footer {
   display: block;
 }
 
-/* ==========================================================================
-   Section Progress Rail with Red-Pink-Purple-Blue Gradient Aura
-   ========================================================================== */
-#rail {
-  position: fixed;
-  left: clamp(1.2rem, 3vw, 2.5rem);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 15;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding-left: 1rem;
-  border-left: 1px solid var(--border-line);
-  width: max-content;
-}
-
-#rail a {
-  position: relative;
-  text-decoration: none;
-  font: 700 0.95rem 'Syne', 'Sora', sans-serif;
-  letter-spacing: 0.02em;
-  color: var(--mute);
-  opacity: 0.45;
-  transition: color 0.35s ease, opacity 0.35s ease, transform 0.35s ease, text-shadow 0.35s ease;
-  transform-origin: left center;
-  white-space: nowrap;
-}
-
-#rail a::before {
-  content: "";
-  position: absolute;
-  left: calc(-1rem - 2px);
-  top: 50%;
-  width: 3.5px;
-  height: 0;
-  background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple), var(--accent-red));
-  transform: translateY(-50%);
-  transition: height 0.35s ease;
-  box-shadow: 0 0 14px var(--accent-blue);
-}
-
-#rail a.active {
-  color: #FFFFFF;
-  opacity: 1;
-  transform: scale(1.12) translateX(4px);
-  text-shadow: 0 0 18px var(--accent-blue), 0 0 32px var(--accent-purple);
-}
-
-#rail a.active::before {
-  height: 130%;
-}
-
 @media (max-width: 768px) {
-  #rail { display: none; }
   section.swirl { padding: 8rem 6vw 4rem; }
   #menuBtn { display: block; }
   #menu {

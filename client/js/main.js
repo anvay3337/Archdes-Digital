@@ -22,19 +22,12 @@ window.enterSite = function () {
   }, 350);
 };
 
-// Zoom sections in on scroll + highlight the left-hand heading
+// Zoom sections in on scroll
 function observe() {
-  const rail = document.querySelectorAll('#rail a');
   const io = new IntersectionObserver(es => es.forEach(e => {
     e.target.classList.toggle('in', e.isIntersecting);
-  }), { threshold: 0.25 });
+  }), { threshold: 0.2 });
   document.querySelectorAll('.swirl').forEach(s => io.observe(s));
-
-  const mark = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) rail.forEach(a => a.classList.toggle('active', a.dataset.sec === e.target.id));
-    if (e.isIntersecting && e.target.id === 'hero') rail.forEach(a => a.classList.remove('active'));
-  }), { rootMargin: '-45% 0px -45% 0px' });   // section crossing the screen's middle line
-  document.querySelectorAll('main section').forEach(s => mark.observe(s));
 }
 
 // Nav
@@ -107,6 +100,7 @@ if (contactForm) {
       const payload = {
         name: String(formData.get('name') || '').trim(),
         email: String(formData.get('email') || '').trim(),
+        phone: String(formData.get('phone') || '').trim(),
         budget: String(formData.get('budget') || '').trim(),
         message: String(formData.get('message') || '').trim()
       };

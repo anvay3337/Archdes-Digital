@@ -8,6 +8,10 @@ const FILE = path.join(__dirname, '..', 'data', 'messages.json');
 const contactLimiter = new RateLimiter(600000, 5);
 
 const ALLOWED_BUDGETS = new Set([
+  'Under ₹50,000',
+  '₹50,000 – ₹1,50,000',
+  '₹1,50,000 – ₹3,00,000',
+  '₹3,00,000+',
   'Under $5k',
   '$5k – $15k',
   '$15k+',
@@ -31,11 +35,12 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'Invalid submission data.' });
   }
 
-  let { name = '', email = '', budget = '', message = '' } = req.body;
+  let { name = '', email = '', phone = '', budget = '', message = '' } = req.body;
 
   // 3. String coercion and trimming
   name = String(name).trim();
   email = String(email).trim().toLowerCase();
+  phone = String(phone).trim();
   budget = String(budget).trim();
   message = String(message).trim();
 
@@ -46,6 +51,10 @@ router.post('/', async (req, res) => {
 
   if (email.length < 5 || email.length > 120 || !EMAIL_REGEX.test(email)) {
     return res.status(400).json({ error: 'Please enter a valid business email address.' });
+  }
+
+  if (phone.length < 6 || phone.length > 25) {
+    return res.status(400).json({ error: 'Please enter a valid phone number.' });
   }
 
   if (budget && !ALLOWED_BUDGETS.has(budget)) {
@@ -62,6 +71,7 @@ router.post('/', async (req, res) => {
   const sanitizedEntry = {
     name: sanitizeText(name),
     email: sanitizeText(email),
+    phone: sanitizeText(phone),
     budget: sanitizeText(budget),
     message: sanitizeText(message),
     at: new Date().toISOString(),

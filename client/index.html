@@ -11,9 +11,9 @@
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
 <link rel="icon" type="image/png" href="assets/archdes-logo.png">
 <link rel="apple-touch-icon" href="assets/archdes-logo.png">
-<link rel="stylesheet" href="css/styles.css?v=1.1.1">
-<link rel="stylesheet" href="css/coverflow.css?v=1.1.1">
-<link rel="stylesheet" href="css/intro.css?v=1.1.1">
+<link rel="stylesheet" href="css/styles.css?v=1.2.0">
+<link rel="stylesheet" href="css/coverflow.css?v=1.2.0">
+<link rel="stylesheet" href="css/intro.css?v=1.2.0">
 <noscript>
   <style>
     #intro { display: none !important; }
@@ -139,12 +139,6 @@
     </ul>
   </nav>
 
-  <aside id="rail" aria-label="Section progress">
-    <a href="#about" data-sec="about">About Us</a>
-    <a href="#portfolio" data-sec="portfolio">Portfolio</a>
-    <a href="#contact" data-sec="contact">Contact Us</a>
-  </aside>
-
   <main>
     <section id="hero" class="swirl">
       <h2>We build websites people remember.</h2>
@@ -217,7 +211,7 @@
       </div>
     </section>
 
-    <section id="portfolio" class="swirl">
+    <section id="portfolio" class="swirl full-bleed">
       <h2>Selected work</h2>
       <p class="sub">Explore our curated digital architectures and interactive releases.</p>
       <div id="portfolioCoverflow" class="portfolio-coverflow-container"></div>
@@ -229,8 +223,14 @@
       <form id="contactForm" novalidate>
         <label>Name<input name="name" required autocomplete="name" placeholder="Alex Vance"></label>
         <label>Email<input name="email" type="email" required autocomplete="email" placeholder="alex@company.com"></label>
+        <label>Phone Number<input name="phone" type="tel" required autocomplete="tel" placeholder="+91 98765 43210"></label>
         <label>Budget
-          <select name="budget"><option>Under $5k</option><option>$5k – $15k</option><option>$15k+</option></select>
+          <select name="budget">
+            <option>Under ₹50,000</option>
+            <option>₹50,000 – ₹1,50,000</option>
+            <option>₹1,50,000 – ₹3,00,000</option>
+            <option>₹3,00,000+</option>
+          </select>
         </label>
         <label>Project details<textarea name="message" rows="5" required placeholder="Describe your vision, goals, and desired launch timeline..."></textarea></label>
         <button class="btn" type="submit">Send message</button>
@@ -248,11 +248,11 @@
 </div>
 
 <script src="js/three.min.js"></script>
-<script src="js/vortex.js?v=1.1.1"></script>
+<script src="js/vortex.js?v=1.2.0"></script>
 <script src="js/gsap.min.js"></script>
 <script src="js/ScrollTrigger.min.js"></script>
-<script src="js/coverflow.js?v=1.1.1"></script>
-<script src="js/main.js?v=1.1.1"></script>
-<script src="js/intro.js?v=1.1.1"></script>
+<script src="js/coverflow.js?v=1.2.0"></script>
+<script src="js/main.js?v=1.2.0"></script>
+<script src="js/intro.js?v=1.2.0"></script>
 </body>
 </html>

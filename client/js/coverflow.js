@@ -246,7 +246,7 @@
         return cardElements[0].offsetWidth;
       }
       const vpW = viewport && viewport.offsetWidth > 0 ? viewport.offsetWidth : window.innerWidth;
-      return Math.min(260, Math.max(148, vpW * 0.22));
+      return Math.min(780, Math.max(320, vpW * 0.55));
     }
 
     function paint() {
