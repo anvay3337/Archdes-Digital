@@ -217,10 +217,10 @@ button[type="submit"]:disabled {
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-weight: 800;
-  font-size: 1.22rem;
-  letter-spacing: 0.04em;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
   color: #FFFFFF;
   text-decoration: none;
   cursor: pointer;
@@ -281,11 +281,13 @@ button[type="submit"]:disabled {
    ========================================================================== */
 section.swirl {
   min-height: 100vh;
-  padding: 9rem 8vw 5rem 16vw;
+  padding: 9rem 7vw 6rem clamp(190px, 19vw, 290px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1.6rem;
+  max-width: 1440px;
+  box-sizing: border-box;
   transform: translateY(28px);
   opacity: 0;
   filter: blur(4px);
@@ -592,10 +594,10 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-weight: 800;
   font-size: 1.15rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   color: #FFFFFF;
 }
 
@@ -611,25 +613,28 @@ footer {
    ========================================================================== */
 #rail {
   position: fixed;
-  left: 3vw;
+  left: clamp(1.2rem, 3vw, 2.5rem);
   top: 50%;
   transform: translateY(-50%);
   z-index: 15;
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 1.5rem;
   padding-left: 1rem;
   border-left: 1px solid var(--border-line);
+  width: max-content;
 }
 
 #rail a {
   position: relative;
   text-decoration: none;
-  font: 800 1.05rem 'Syne', sans-serif;
+  font: 700 0.95rem 'Syne', 'Sora', sans-serif;
+  letter-spacing: 0.02em;
   color: var(--mute);
   opacity: 0.45;
-  transition: color 0.4s, opacity 0.4s, transform 0.4s, text-shadow 0.4s;
+  transition: color 0.35s ease, opacity 0.35s ease, transform 0.35s ease, text-shadow 0.35s ease;
   transform-origin: left center;
+  white-space: nowrap;
 }
 
 #rail a::before {
@@ -641,19 +646,19 @@ footer {
   height: 0;
   background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple), var(--accent-red));
   transform: translateY(-50%);
-  transition: height 0.4s;
+  transition: height 0.35s ease;
   box-shadow: 0 0 14px var(--accent-blue);
 }
 
 #rail a.active {
   color: #FFFFFF;
   opacity: 1;
-  transform: scale(1.35) translateX(6px);
+  transform: scale(1.12) translateX(4px);
   text-shadow: 0 0 18px var(--accent-blue), 0 0 32px var(--accent-purple);
 }
 
 #rail a.active::before {
-  height: 140%;
+  height: 130%;
 }
 
 @media (max-width: 768px) {
