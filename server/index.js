@@ -75,15 +75,16 @@ app.use((err, req, res, next) => {
 const clientDir = path.join(__dirname, '..', 'client');
 app.use(
   express.static(clientDir, {
-    maxAge: IS_PROD ? '1d' : '0',
+    maxAge: 0,
     etag: true,
     dotfiles: 'ignore',
     setHeaders: (res, filePath) => {
-      // Long-term cache for immutable assets
+      // Long-term cache for immutable binary assets (images, fonts)
       if (filePath.includes(path.sep + 'assets' + path.sep)) {
         res.setHeader('Cache-Control', 'public, max-age=604800, immutable');
-      } else if (filePath.endsWith('.html')) {
-        res.setHeader('Cache-Control', 'no-cache');
+      } else {
+        // Always revalidate HTML, CSS, JS
+        res.setHeader('Cache-Control', 'no-cache, must-revalidate');
       }
     }
   })
