@@ -248,9 +248,6 @@
     skipBtn.addEventListener('click', finish);
   }
 
-  // Fallback safety timer: Intro is ~13.5s, safety guarantee at 14.5s
-  safetyTimer = setTimeout(finish, 14500);
-
   let gsapWaitAttempts = 0;
   function initIntro() {
     if (typeof gsap === 'undefined') {
@@ -468,7 +465,14 @@
     function launch() {
       fit();
       completeLoadingAndPlay(() => {
-        setTimeout(() => tl.play(0), 100);
+        setTimeout(() => {
+          if (!tl) return;
+          tl.play(0);
+          if (safetyTimer) clearTimeout(safetyTimer);
+          safetyTimer = setTimeout(() => {
+            if (!done) finish();
+          }, 35000);
+        }, 100);
       });
     }
 
