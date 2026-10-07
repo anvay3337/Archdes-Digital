@@ -118,22 +118,24 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 13. Start Server with graceful shutdown
-const server = app.listen(PORT, () => {
-  console.log(`Archdes Digital secure server running at http://localhost:${PORT}`);
-});
-
-function gracefulShutdown(signal) {
-  console.log(`Received ${signal}. Shutting down gracefully...`);
-  server.close(() => {
-    console.log('HTTP server closed.');
-    process.exit(0);
+// 13. Start Server with graceful shutdown (when run as standalone server)
+if (require.main === module || !process.env.VERCEL) {
+  const server = app.listen(PORT, () => {
+    console.log(`Archdes Digital secure server running at http://localhost:${PORT}`);
   });
-  // Force close after 5 seconds if connections hang
-  setTimeout(() => process.exit(1), 5000).unref();
-}
 
-process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
-process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+  function gracefulShutdown(signal) {
+    console.log(`Received ${signal}. Shutting down gracefully...`);
+    server.close(() => {
+      console.log('HTTP server closed.');
+      process.exit(0);
+    });
+    // Force close after 5 seconds if connections hang
+    setTimeout(() => process.exit(1), 5000).unref();
+  }
+
+  process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+  process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+}
 
 module.exports = app;
