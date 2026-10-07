@@ -1,0 +1,8 @@
+[
+  { "title": "Nova Bank", "type": "Fintech platform", "url": "https://example.com/nova-bank", "hue": 190 },
+  { "title": "Kairo Motors", "type": "3D product configurator", "url": "https://example.com/kairo-motors", "hue": 265 },
+  { "title": "Lumen Health", "type": "Patient portal", "url": "https://example.com/lumen-health", "hue": 150 },
+  { "title": "Atlas Logistics", "type": "Live fleet dashboard", "url": "https://example.com/atlas", "hue": 30 },
+  { "title": "Pulse Studio", "type": "Immersive brand site", "url": "https://example.com/pulse", "hue": 330 },
+  { "title": "Orbit Learning", "type": "E-learning app", "url": "https://example.com/orbit", "hue": 215 }
+]

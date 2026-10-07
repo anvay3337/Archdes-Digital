@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archdes Digital — Web design that moves people</title>
+<meta name="description" content="Archdes Digital is a web design agency building immersive, high-performance websites.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Sora:wght@500;700;800&family=Syne:wght@600;800&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+<link rel="icon" type="image/png" href="assets/archdes-logo.png">
+<link rel="apple-touch-icon" href="assets/archdes-logo.png">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/coverflow.css">
+<link rel="stylesheet" href="css/intro.css">
+<noscript>
+  <style>
+    #intro { display: none !important; }
+    #site { display: block !important; }
+    body.locked { overflow: auto !important; }
+  </style>
+</noscript>
+<script>
+  // Global fail-safe watchdog: guarantees site visibility even if scripts or network encounter unexpected failure
+  setTimeout(function() {
+    try {
+      var intro = document.getElementById('intro');
+      var site = document.getElementById('site');
+      if (intro && !intro.classList.contains('out')) {
+        document.body.classList.remove('locked');
+        intro.style.display = 'none';
+        if (site) {
+          site.hidden = false;
+          site.removeAttribute('hidden');
+          site.style.display = 'block';
+        }
+      }
+    } catch (e) {}
+  }, 15000);
+</script>
+</head>
+<body>
+
+<!-- SMART NETWORK PRELOADER (Shows for 3 seconds before intro on first visit only) -->
+<aside id="netLoader" aria-label="Loading Archdes Digital" aria-live="polite">
+  <canvas id="loaderThrustCanvas" class="loader-thrust-canvas"></canvas>
+  <div class="loader-rocket-group" id="loaderRocketGroup">
+    <div class="loader-glow-wrapper">
+      <div class="loader-glow-aura"></div>
+      <div class="loader-circular-ring"></div>
+      <div class="loader-logo-core">
+        <img src="assets/archdes-logo.png" alt="Archdes Digital" width="68" height="68">
+      </div>
+    </div>
+    <div class="loader-thrust-beam" id="loaderThrustBeam"></div>
+  </div>
+  <div class="loader-caption" id="loaderCaption">
+    Connecting<span class="loader-dots"><span>.</span><span>.</span><span>.</span></span>
+  </div>
+</aside>
+<script>
+  (function() {
+    try {
+      if (sessionStorage.getItem('archdes_preloader_seen')) {
+        var el = document.getElementById('netLoader');
+        if (el) el.style.display = 'none';
+      } else {
+        window.__archdesPreloaderStart = Date.now();
+      }
+    } catch(e) {
+      window.__archdesPreloaderStart = Date.now();
+    }
+  })();
+</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="12"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -10"/></filter>
+</defs></svg>
+
+<!-- 3D SPIRAL VORTEX GALAXY BACKGROUND -->
+<canvas id="vortex" aria-hidden="true"></canvas>
+
+<!-- INTRO: archdes-intro index (1).html animation -->
+<section id="intro" aria-label="Archdes Digital intro animation">
+  <div id="cam">
+    <div id="bg"></div><div id="tech"></div>
+    <canvas id="liq"></canvas>
+    <svg class="brush" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+      <path pathLength="1" d="M-20 170 C200 90 380 240 560 150 S880 120 1040 170"/>
+    </svg>
+    <div class="w" id="w1"><span>WEB<i>.</i></span></div><div class="w" id="w2"><span>DESIGN<i>.</i></span></div><div class="w" id="w3"><span>REIMAGINED<i>.</i></span></div>
+
+    <div class="scene"><div class="rig" id="rig">
+      <div class="orbit" id="o1"></div><div class="orbit" id="o2"></div>
+      <div class="chip c1">&lt;/&gt; clean code</div><div class="chip c2">3D &middot; motion</div><div class="chip c3">UI / UX</div><div class="chip c4">+240% leads</div>
+      <div class="bezel"><div class="screen" id="screen">
+        <div class="chrome"><i></i><i></i><i></i><b id="url">archdes.digital</b></div>
+        <div class="m-nav"><div style="display:flex;align-items:center;gap:.5em"><img id="navmark" src="assets/archdes-logo.png" alt="" style="height:1.5em;width:auto"> Archdes</div><div><span>Work</span><span>About</span><a class="m-btn" id="cta">Let's talk</a></div></div>
+        <div class="scroll" id="scroll">
+          <div class="m-hero"><small>NEXT-GEN WEB STUDIO</small><h3>We build websites people remember.</h3></div>
+          <div class="m-cards"><div></div><div></div><div></div></div>
+          <div class="m-chart"><i style="--h:30%"></i><i style="--h:55%"></i><i style="--h:42%"></i><i style="--h:75%"></i><i style="--h:60%"></i><i style="--h:90%"></i><i style="--h:70%"></i><i style="--h:100%"></i></div>
+          <div class="m-cards"><div></div><div></div><div></div></div>
+        </div>
+        <svg class="cur" id="cur" viewBox="0 0 24 24"><path d="M3 2l16 9-7 2 4 8-3 1-4-8-6 5z" fill="#fff" stroke="#030720" stroke-width="1.2"/></svg>
+        <div class="glare" id="glare"></div>
+      </div></div>
+      <div class="neck"></div><div class="base"></div>
+    </div></div>
+
+    <div class="shock" id="shock"></div>
+    <div class="logo" id="logo"><div class="lock">
+      <div class="mark" id="mark"><img id="logoimg" alt="Archdes Digital logo mark" src="assets/archdes-logo.png"></div>
+      <div class="txt"><div class="word" id="word" aria-label="Archdes"></div><div class="sub" id="sub">DIGITAL</div></div>
+    </div></div>
+
+    <div class="flash" id="flash"></div>
+    <div class="grain"></div>
+    <div class="vig"></div>
+    <div class="hud" id="h1">ARCHDES DIGITAL &copy; 2026</div>
+    <div id="bar"></div>
+  </div>
+  <button id="skip" class="skip btn-liquid-glass" aria-label="Skip intro">Skip intro</button>
+</section>
+
+<!-- HOME -->
+<div id="site" hidden>
+  <nav id="nav">
+    <a href="#intro" class="logo" id="logoBtn" title="Back to intro" aria-label="Archdes Digital - Back to intro">
+      <img class="mk" src="assets/archdes-logo.png" alt="Archdes Digital logo" width="28" height="28">
+      <span>ARCHDES DIGITAL</span>
+    </a>
+    <button id="menuBtn" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+    <ul id="menu">
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <aside id="rail" aria-label="Section progress">
+    <a href="#about" data-sec="about">About Us</a>
+    <a href="#portfolio" data-sec="portfolio">Portfolio</a>
+    <a href="#contact" data-sec="contact">Contact Us</a>
+  </aside>
+
+  <main>
+    <section id="hero" class="swirl">
+      <h2>We build websites people remember.</h2>
+      <p>Archdes Digital is a high-performance web agency. We design and develop fast, immersive 3D web experiences that elevate your brand into the future and drive massive conversion.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn">Start a project</a>
+        <a href="#about" class="btn btn-sec">Explore capabilities &rarr;</a>
+      </div>
+    </section>
+
+    <section id="about" class="swirl">
+      <h2>About Us</h2>
+      <p class="sub">We engineer bespoke digital realities. Designed to harmonize with cosmic scale and convert visitors into devotees.</p>
+      <div class="grid">
+        <article class="cosmic-card">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-idx">01 // ARCHITECTURE</span>
+            <span class="card-glyph">◈</span>
+          </div>
+          <h3>Website design</h3>
+          <p>Custom layouts and celestial visual identities sculpted around how your visitors perceive, trust, and convert.</p>
+          <div class="card-tags">
+            <span>Bespoke UI/UX</span>
+            <span>Design Systems</span>
+          </div>
+        </article>
+
+        <article class="cosmic-card">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-idx">02 // ORBITAL REALMS</span>
+            <span class="card-glyph">✦</span>
+          </div>
+          <h3>3D and motion</h3>
+          <p>Interactive WebGL scenes, generative shaders, and fluid kinetics that captivate visitors and invite active exploration.</p>
+          <div class="card-tags">
+            <span>Three.js / WebGL</span>
+            <span>Kinetics</span>
+          </div>
+        </article>
+
+        <article class="cosmic-card">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-idx">03 // CORE MATRIX</span>
+            <span class="card-glyph">⬡</span>
+          </div>
+          <h3>Web development</h3>
+          <p>Ultra-fast, accessible, production-grade applications with zero-lag responsiveness and backends engineered to scale.</p>
+          <div class="card-tags">
+            <span>High Velocity</span>
+            <span>Scalable API</span>
+          </div>
+        </article>
+
+        <article class="cosmic-card">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-idx">04 // EXPANSION VECTOR</span>
+            <span class="card-glyph">▲</span>
+          </div>
+          <h3>Care and growth</h3>
+          <p>Continuous telemetry, cloud infrastructure tuning, search dominance, and evolutionary features post-launch.</p>
+          <div class="card-tags">
+            <span>Performance SEO</span>
+            <span>Uptime 99.9%</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="portfolio" class="swirl">
+      <h2>Selected work</h2>
+      <p class="sub">Explore our curated digital architectures and interactive releases.</p>
+      <div id="portfolioCoverflow" class="portfolio-coverflow-container"></div>
+    </section>
+
+    <section id="contact" class="swirl">
+      <h2>Tell us what you want to build</h2>
+      <p class="sub">Reach our mission engineers to discuss your next breakthrough website.</p>
+      <form id="contactForm" novalidate>
+        <label>Name<input name="name" required autocomplete="name" placeholder="Alex Vance"></label>
+        <label>Email<input name="email" type="email" required autocomplete="email" placeholder="alex@company.com"></label>
+        <label>Budget
+          <select name="budget"><option>Under $5k</option><option>$5k – $15k</option><option>$15k+</option></select>
+        </label>
+        <label>Project details<textarea name="message" rows="5" required placeholder="Describe your vision, goals, and desired launch timeline..."></textarea></label>
+        <button class="btn" type="submit">Send message</button>
+        <p id="formMsg" role="status"></p>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-brand">
+      <img class="mk" src="assets/archdes-logo.png" alt="Archdes Digital logo" width="24" height="24">
+      <span>ARCHDES DIGITAL</span>
+    </div>
+    <p>© <span id="yr"></span> Archdes Digital. All rights reserved.</p>
+  </footer>
+</div>
+
+<script src="js/three.min.js"></script>
+<script src="js/vortex.js"></script>
+<script src="js/gsap.min.js"></script>
+<script src="js/ScrollTrigger.min.js"></script>
+<script src="js/coverflow.js"></script>
+<script src="js/main.js"></script>
+<script src="js/intro.js"></script>
+</body>
+</html>
