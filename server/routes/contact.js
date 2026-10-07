@@ -16,7 +16,9 @@ const ALLOWED_BUDGETS = new Set([
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
-router.post('/', (req, res) => {
+const { sendInquiryEmail } = require('../mailer');
+
+router.post('/', async (req, res) => {
   const clientIp = req.ip || req.connection?.remoteAddress || '127.0.0.1';
 
   // 1. Rate limiting check
@@ -66,7 +68,7 @@ router.post('/', (req, res) => {
     ip: clientIp.replace(/^.*:/, '') // store anonymized/clean IPv4/IPv6 suffix
   };
 
-  // 6. Safe atomic file persistence
+  // 6. Safe atomic file persistence (ephemeral in serverless)
   try {
     let list = [];
     if (fs.existsSync(FILE)) {
@@ -75,17 +77,23 @@ router.post('/', (req, res) => {
         list = JSON.parse(raw || '[]');
         if (!Array.isArray(list)) list = [];
       } catch (parseErr) {
-        console.warn('Recovering corrupted messages.json archive.');
         list = [];
       }
     }
-
     list.push(sanitizedEntry);
     writeJsonAtomic(FILE, list);
-    return res.json({ ok: true });
-  } catch (err) {
-    console.error('Failed to store message:', err.message);
-    return res.status(500).json({ error: 'Could not save message at this time. Please try again later.' });
+  } catch (fsErr) {
+    console.warn('[STORAGE] Local file write bypassed (serverless environment):', fsErr.message);
+  }
+
+  // 7. Dispatch inquiry email to archdesdigital@gmail.com with JSON payload
+  try {
+    const mailResult = await sendInquiryEmail(sanitizedEntry);
+    return res.json({ ok: true, emailDispatched: mailResult.delivered });
+  } catch (mailErr) {
+    console.error('[EMAIL ERROR] Unexpected failure in mailer:', mailErr);
+    // Still acknowledge client submission gracefully
+    return res.json({ ok: true, emailDispatched: false });
   }
 });
 
