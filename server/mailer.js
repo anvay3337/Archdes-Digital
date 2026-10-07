@@ -2,13 +2,19 @@ const nodemailer = require('nodemailer');
 
 const RECIPIENT_EMAIL = process.env.CONTACT_EMAIL || 'archdesdigital@gmail.com';
 
+const DEFAULT_USER = 'archdesdigital@gmail.com';
+const DEFAULT_PASS = 'pcidegpvdkbzqmmq';
+
 /**
- * Creates an SMTP transporter using environment variables.
+ * Creates an SMTP transporter using environment variables or configured defaults.
  * Compatible with Gmail App Passwords, Resend SMTP, SendGrid, or generic SMTP providers.
  */
 function getTransporter() {
-  const user = process.env.EMAIL_USER || process.env.SMTP_USER || process.env.GMAIL_USER;
-  const pass = process.env.EMAIL_PASS || process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
+  const rawUser = process.env.EMAIL_USER || process.env.SMTP_USER || process.env.GMAIL_USER || DEFAULT_USER;
+  const rawPass = process.env.EMAIL_PASS || process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD || DEFAULT_PASS;
+  
+  const user = rawUser ? rawUser.trim() : '';
+  const pass = rawPass ? rawPass.replace(/\s+/g, '') : '';
   const host = process.env.SMTP_HOST || 'smtp.gmail.com';
   const port = parseInt(process.env.SMTP_PORT || '465', 10);
   const secure = process.env.SMTP_SECURE !== 'false' && (port === 465);
@@ -41,7 +47,7 @@ async function sendInquiryEmail(payload) {
   const jsonString = JSON.stringify(payload, null, 2);
   const transporter = getTransporter();
 
-  const senderUser = process.env.EMAIL_USER || process.env.SMTP_USER || process.env.GMAIL_USER || 'no-reply@archdes.digital';
+  const senderUser = (process.env.EMAIL_USER || process.env.SMTP_USER || process.env.GMAIL_USER || DEFAULT_USER).trim();
 
   const mailOptions = {
     from: `"Archdes Digital Inquiries" <${senderUser}>`,
