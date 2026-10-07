@@ -8,6 +8,9 @@ const FILE = path.join(__dirname, '..', 'data', 'messages.json');
 const contactLimiter = new RateLimiter(600000, 5);
 
 const ALLOWED_BUDGETS = new Set([
+  'Basic',
+  'Premium',
+  'Luxury',
   'Under ₹50,000',
   '₹50,000 – ₹1,50,000',
   '₹1,50,000 – ₹3,00,000',

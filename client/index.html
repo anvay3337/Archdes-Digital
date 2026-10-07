@@ -224,12 +224,11 @@
         <label>Name<input name="name" required autocomplete="name" placeholder="Alex Vance"></label>
         <label>Email<input name="email" type="email" required autocomplete="email" placeholder="alex@company.com"></label>
         <label>Phone Number<input name="phone" type="tel" required autocomplete="tel" placeholder="+91 98765 43210"></label>
-        <label>Budget
+        <label>Quotation / Plan
           <select name="budget">
-            <option>Under ₹50,000</option>
-            <option>₹50,000 – ₹1,50,000</option>
-            <option>₹1,50,000 – ₹3,00,000</option>
-            <option>₹3,00,000+</option>
+            <option value="Basic">Basic</option>
+            <option value="Premium">Premium</option>
+            <option value="Luxury">Luxury</option>
           </select>
         </label>
         <label>Project details<textarea name="message" rows="5" required placeholder="Describe your vision, goals, and desired launch timeline..."></textarea></label>
