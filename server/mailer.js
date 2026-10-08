@@ -107,7 +107,7 @@ async function sendInquiryEmail(payload) {
   };
 
   if (!transporter) {
-    console.warn('[EMAIL WARNING] SMTP credentials not set (EMAIL_USER / EMAIL_PASS). Message JSON logged below:');
+    console.warn('[EMAIL WARNING] SMTP credentials not set (SMTP_USER / SMTP_PASS). Message JSON logged below:');
     console.log(jsonString);
     return {
       success: true,
@@ -117,8 +117,38 @@ async function sendInquiryEmail(payload) {
   }
 
   try {
+    // 1. Notification to Admin
     const info = await transporter.sendMail(mailOptions);
-    console.log(`[EMAIL SENT] Inquiry dispatched to ${RECIPIENT_EMAIL}. MessageId: ${info.messageId}`);
+    console.log(`[EMAIL SENT] Inquiry notification dispatched to ${RECIPIENT_EMAIL}. MessageId: ${info.messageId}`);
+
+    // 2. Branded Auto-Reply to Visitor
+    if (payload.email) {
+      const businessName = process.env.BUSINESS_NAME || 'Archdes Digital';
+      const safeName = String(payload.name || 'there')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      try {
+        await transporter.sendMail({
+          from: `"${businessName}" <${senderUser}>`,
+          to: payload.email,
+          subject: 'Thank you for your enquiry',
+          text: `Hi ${payload.name},\n\nThank you for your enquiry. We've received your message and one of our team will get back to you within 24 hours.\n\nIf your matter is urgent, you can reply directly to this email.\n\nWarm regards,\n${businessName}`,
+          html: `
+            <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#222;line-height:1.6">
+              <p>Hi ${safeName},</p>
+              <p>Thank you for your enquiry. We've received your message and one of our team will get back to you within <strong>24 hours</strong>.</p>
+              <p>If your matter is urgent, you can reply directly to this email.</p>
+              <p>Warm regards,<br>${businessName}</p>
+            </div>`
+        });
+        console.log(`[AUTO-REPLY SENT] Sent to visitor: ${payload.email}`);
+      } catch (replyErr) {
+        console.warn('[AUTO-REPLY WARNING] Could not send auto-reply to client:', replyErr.message);
+      }
+    }
+
     return {
       success: true,
       delivered: true,

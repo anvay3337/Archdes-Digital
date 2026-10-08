@@ -1,10 +1,19 @@
+require("dotenv").config();
 const express = require('express');
+const nodemailer = require("nodemailer");
 const path = require('path');
 const { RateLimiter } = require('./security');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const IS_PROD = process.env.NODE_ENV === 'production';
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT) || 587,
+  secure: process.env.SMTP_PORT === "465",
+  auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+});
 
 // 1. Process-level crash guards to ensure the server never terminates abruptly
 process.on('uncaughtException', err => {
@@ -60,8 +69,9 @@ app.use('/api', (req, res, next) => {
   next();
 });
 
-// 6. JSON Body Parser with strict 20kb limit
+// 6. Body Parsers (JSON & URL-Encoded Form Data)
 app.use(express.json({ limit: '20kb' }));
+app.use(express.urlencoded({ extended: true }));
 
 // 7. Gracefully intercept invalid/malformed JSON payloads
 app.use((err, req, res, next) => {
@@ -99,11 +109,72 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 10. API Routes
+// 10. Enquiry Endpoint
+app.post("/enquiry", async (req, res) => {
+  // Change these to match the "name" attributes in YOUR form
+  const { name, email, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).send("Missing required fields");
+  }
+
+  const businessName = process.env.BUSINESS_NAME || "Archdes Digital";
+
+  // Escape the name so visitors can't inject HTML into the email
+  const safeName = String(name)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  try {
+    // Auto-reply to the visitor
+    await transporter.sendMail({
+      from: `"${businessName}" <${process.env.FROM_EMAIL}>`,
+      to: email,
+      subject: "Thank you for your enquiry",
+
+      // Plain-text version (for email apps that don't show HTML)
+      text:
+`Hi ${name},
+
+Thank you for your enquiry. We've received your message and one of our team will get back to you within 24 hours.
+
+If your matter is urgent, you can reply directly to this email.
+
+Warm regards,
+${businessName}`,
+
+      // HTML version
+      html: `
+        <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#222;line-height:1.6">
+          <p>Hi ${safeName},</p>
+          <p>Thank you for your enquiry. We've received your message and one of our team will get back to you within <strong>24 hours</strong>.</p>
+          <p>If your matter is urgent, you can reply directly to this email.</p>
+          <p>Warm regards,<br>${businessName}</p>
+        </div>`,
+    });
+
+    // Notification to you
+    await transporter.sendMail({
+      from: `"Website Enquiries" <${process.env.FROM_EMAIL}>`,
+      to: process.env.NOTIFY_EMAIL,
+      replyTo: email,
+      subject: `New enquiry from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+    });
+
+    res.redirect("/thank-you.html"); // or: res.json({ ok: true });
+  } catch (err) {
+    console.error("Email error:", err);
+    res.status(500).send("Could not send your enquiry. Please try again.");
+  }
+});
+
+// 11. API Routes
 app.use('/api/projects', require('./routes/projects'));
 app.use('/api/contact', require('./routes/contact'));
 
-// 11. API 404 Catch-All
+// 12. API 404 Catch-All
 app.use('/api', (req, res) => {
   res.status(404).json({ error: 'API endpoint not found.' });
 });
@@ -120,7 +191,7 @@ app.use((err, req, res, next) => {
 });
 
 // 13. Start Server with graceful shutdown (when run as standalone server)
-if (require.main === module || !process.env.VERCEL) {
+if (require.main === module) {
   const server = app.listen(PORT, () => {
     console.log(`Archdes Digital secure server running at http://localhost:${PORT}`);
   });

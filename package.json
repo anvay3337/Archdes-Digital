@@ -5,6 +5,7 @@
     "start": "node server/index.js"
   },
   "dependencies": {
+    "dotenv": "^18.0.6",
     "express": "^4.19.2",
     "nodemailer": "^10.0.15"
   }
