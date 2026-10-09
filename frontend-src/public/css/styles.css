@@ -1,0 +1,648 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   Archdes Digital — High-Concept Studio Theme
+   Aesthetic Architecture:
+   - Deep Obsidian Pure Dark Canvas (#000000 / #06070B)
+   - Stark Architectural White (#FFFFFF) & Refined Starlight Grays (#94A3B8)
+   - Gradient Spectrum: Red (#FF1E56) -> Pink (#FF2E93) -> Purple (#8B5CF6) -> Blue (#00D2FF) -> Black Glass
+   - Liquid Glass Interfaces & Weightless 3D Kinetic Depth
+   ========================================================================== */
+
+:root {
+  /* Canvas & Structural Glass Tones */
+  --bg: #000000;
+  --bg-sec: #06070B;
+  --ink: #FFFFFF;
+  --ink-dim: #F1F5F9;
+  --mute: #94A3B8;
+  --mute-dark: #475569;
+  --border-line: rgba(255, 255, 255, 0.12);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+
+  /* Premium Obsidian Glass Surface */
+  --card-glass: rgba(10, 10, 18, 0.72);
+  --card-glass-hover: rgba(16, 14, 26, 0.82);
+
+  /* Luxury Red -> Pink -> Purple -> Blue Gradient Spectrum */
+  --accent-red: #FF1E56;
+  --accent-red-glow: rgba(255, 30, 86, 0.45);
+  --accent-red-subtle: rgba(255, 30, 86, 0.14);
+
+  --accent-pink: #FF2E93;
+  --accent-pink-glow: rgba(255, 46, 147, 0.45);
+  --accent-pink-subtle: rgba(255, 46, 147, 0.14);
+
+  --accent-purple: #8B5CF6;
+  --accent-purple-glow: rgba(139, 92, 246, 0.45);
+  --accent-purple-subtle: rgba(139, 92, 246, 0.14);
+
+  --accent-violet: #A855F7;
+  --accent-violet-glow: rgba(168, 85, 247, 0.4);
+
+  --accent-blue: #00D2FF;
+  --accent-blue-glow: rgba(0, 210, 255, 0.45);
+  --accent-blue-subtle: rgba(0, 210, 255, 0.14);
+
+  --accent-cobalt: #2563EB;
+
+  /* Aliases & Shared Constants */
+  --a: #FF2E93;
+  --b: #8B5CF6;
+  --c: #00D2FF;
+  --line: rgba(255, 255, 255, 0.12);
+}
+
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1.05rem / 1.65 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: 'Sora', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.08;
+}
+
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-pink); outline-offset: 3px; }
+
+/* ==========================================================================
+   Liquid Glass Button (Red-Pink-Purple Specular Rim & Obsidian Depth)
+   ========================================================================== */
+.btn,
+button[type="submit"],
+input[type="submit"],
+.btn-liquid-glass {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2.4rem;
+  border-radius: 9999px;
+  font: 600 0.98rem 'Manrope', system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background:
+    radial-gradient(130% 100% at 50% 0%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 60%, rgba(0, 0, 0, 0.4) 100%),
+    rgba(12, 14, 22, 0.68);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.65),
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    /* Top rim reflection */
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.55),
+    /* Bottom right inner specular arc */
+    inset -1.5px -1.5px 1.5px 0 rgba(255, 255, 255, 0.85),
+    /* Bottom right external crescent glow */
+    1px 2px 5px 0 rgba(255, 46, 147, 0.35),
+    2px 3px 12px 1px rgba(139, 92, 246, 0.2);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background 0.25s ease,
+              border-color 0.25s ease,
+              opacity 0.25s ease;
+}
+
+.btn:hover,
+button[type="submit"]:hover,
+input[type="submit"]:hover,
+.btn-liquid-glass:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 46, 147, 0.7);
+  background:
+    radial-gradient(130% 100% at 50% 0%, rgba(255, 46, 147, 0.2) 0%, rgba(139, 92, 246, 0.08) 60%, rgba(0, 0, 0, 0.3) 100%),
+    rgba(18, 20, 32, 0.78);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(255, 46, 147, 0.4),
+    0 0 45px rgba(139, 92, 246, 0.25),
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.75),
+    inset -2px -2px 2px 0 rgba(255, 255, 255, 0.95);
+}
+
+.btn:active,
+button[type="submit"]:active,
+input[type="submit"]:active,
+.btn-liquid-glass:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.4),
+    inset -1px -1px 1.5px 0 rgba(255, 255, 255, 0.7);
+}
+
+.btn:disabled,
+button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.btn-sec {
+  background:
+    radial-gradient(130% 100% at 50% 0%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 60%, rgba(0, 0, 0, 0.35) 100%),
+    rgba(10, 12, 18, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--ink-dim);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.25),
+    inset -1px -1px 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-sec:hover {
+  border-color: rgba(139, 92, 246, 0.6);
+  color: #FFFFFF;
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(139, 92, 246, 0.35),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* 3D Star Spiral Galaxy Canvas — 100% Crystal Clear */
+#vortex {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 1;
+}
+
+#site {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Navigation Bar — Sleek Obsidian Glass & Specular Bevel
+   ========================================================================== */
+#nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.95rem 5vw;
+  background: rgba(4, 5, 10, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: #FFFFFF;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+  opacity: 0.95;
+}
+
+.mk {
+  width: 1.8rem;
+  height: 1.8rem;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.6));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.logo:hover .mk {
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 14px rgba(0, 210, 255, 0.9)) drop-shadow(0 0 22px rgba(139, 92, 246, 0.6));
+}
+
+#menu {
+  display: flex;
+  gap: 2.2rem;
+  list-style: none;
+  padding: 0;
+}
+
+#menu a {
+  text-decoration: none;
+  color: var(--mute);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+#menu a:hover {
+  color: #FFFFFF;
+  text-shadow: 0 0 16px rgba(255, 46, 147, 0.8), 0 0 28px rgba(139, 92, 246, 0.5);
+}
+
+#menuBtn {
+  display: none;
+  background: rgba(14, 16, 24, 0.85);
+  border: 1px solid var(--border-line);
+  color: var(--ink);
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+}
+
+/* ==========================================================================
+   Section Architecture — Weightless Float matching 3D Universe
+   ========================================================================== */
+section.swirl {
+  min-height: 100vh;
+  padding: 8.5rem 6vw 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.6rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  transform: translateY(28px);
+  opacity: 0;
+  filter: blur(4px);
+  transition: transform 0.9s cubic-bezier(0.16, 0.9, 0.2, 1), opacity 0.8s ease, filter 0.8s ease;
+}
+
+section.swirl.full-bleed {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+section.swirl.full-bleed h2,
+section.swirl.full-bleed .sub {
+  padding-left: 6vw;
+  padding-right: 6vw;
+}
+
+section.swirl.in {
+  transform: none;
+  opacity: 1;
+  filter: none;
+}
+
+#hero p, #about .sub {
+  max-width: 54ch;
+}
+
+#hero h2 {
+  font-size: clamp(2.6rem, 7.5vw, 6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  max-width: 14ch;
+  line-height: 1.05;
+  background: linear-gradient(125deg, #FFFFFF 0%, #E0F2FE 20%, #00D2FF 45%, #8B5CF6 70%, #FF1E56 90%, #FFFFFF 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 1px rgba(255, 255, 255, 0.85));
+  animation: chromaticTextFlow 10s ease-in-out infinite alternate;
+}
+
+@keyframes chromaticTextFlow {
+  0% { background-position: 0% center; }
+  100% { background-position: 100% center; }
+}
+
+#hero p {
+  color: #E2E8F0;
+  font-size: 1.18rem;
+  line-height: 1.75;
+  background: linear-gradient(110deg, #FFFFFF 0%, #E2E8F0 50%, #CBD5E1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.8));
+}
+
+section h2 {
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  letter-spacing: -0.02em;
+  background: linear-gradient(125deg, #FFFFFF 0%, #E0F2FE 25%, #00D2FF 50%, #8B5CF6 75%, #FF1E56 95%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 12px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 1px rgba(255, 255, 255, 0.8));
+  animation: chromaticTextFlow 12s ease-in-out infinite alternate;
+}
+
+#about .sub {
+  font-size: 1.18rem;
+  line-height: 1.75;
+  max-width: 56ch;
+  background: linear-gradient(115deg, #FFFFFF 0%, #F1F5F9 35%, #00D2FF 70%, #8B5CF6 95%);
+  background-size: 180% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 1px rgba(255, 255, 255, 0.6));
+}
+
+.sub {
+  color: var(--mute);
+  font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   About Us — Multi-Chromatic Luxury Dark Glass Cards
+   ========================================================================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+  margin-top: 1.2rem;
+}
+
+.cosmic-card {
+  position: relative;
+  overflow: hidden;
+  padding: 2.2rem 2rem;
+  border-radius: 20px;
+  background: var(--card-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-line);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+  transition: transform 0.35s cubic-bezier(0.16, 0.9, 0.2, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+}
+
+.card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 46, 147, 0.14), rgba(139, 92, 246, 0.08), transparent 70%);
+  opacity: 0.35;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.cosmic-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 46, 147, 0.5);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9),
+              0 0 35px rgba(255, 46, 147, 0.22);
+}
+
+.cosmic-card:hover .card-glow {
+  opacity: 1;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+/* Multi-chromatic per-card accents: Red -> Pink -> Purple -> Blue */
+.card-idx {
+  font: 700 0.72rem 'Manrope', sans-serif;
+  letter-spacing: 0.2em;
+  color: var(--accent-red);
+}
+
+.cosmic-card:nth-child(2) .card-idx { color: var(--accent-pink); }
+.cosmic-card:nth-child(3) .card-idx { color: var(--accent-purple); }
+.cosmic-card:nth-child(4) .card-idx { color: var(--accent-blue); }
+
+.card-glyph {
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--accent-red);
+  text-shadow: 0 0 14px rgba(255, 30, 86, 0.75);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.cosmic-card:nth-child(2) .card-glyph {
+  color: var(--accent-pink);
+  text-shadow: 0 0 14px rgba(255, 46, 147, 0.75);
+}
+
+.cosmic-card:nth-child(3) .card-glyph {
+  color: var(--accent-purple);
+  text-shadow: 0 0 14px rgba(139, 92, 246, 0.75);
+}
+
+.cosmic-card:nth-child(4) .card-glyph {
+  color: var(--accent-blue);
+  text-shadow: 0 0 14px rgba(0, 210, 255, 0.75);
+}
+
+.cosmic-card:hover .card-glyph {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.cosmic-card h3 {
+  margin-bottom: 0.6rem;
+  font-size: 1.35rem;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.cosmic-card p {
+  color: var(--mute);
+  font-size: 0.96rem;
+  line-height: 1.6;
+  margin-bottom: 1.4rem;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.card-tags span {
+  font: 600 0.72rem 'Manrope', sans-serif;
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 0.28rem 0.85rem;
+  border-radius: 99px;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+
+.cosmic-card:hover .card-tags span {
+  border-color: rgba(255, 30, 86, 0.45);
+  color: var(--accent-red);
+  background: rgba(255, 30, 86, 0.1);
+}
+
+.cosmic-card:nth-child(2):hover .card-tags span {
+  border-color: rgba(255, 46, 147, 0.45);
+  color: var(--accent-pink);
+  background: rgba(255, 46, 147, 0.1);
+}
+
+.cosmic-card:nth-child(3):hover .card-tags span {
+  border-color: rgba(139, 92, 246, 0.45);
+  color: var(--accent-purple);
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.cosmic-card:nth-child(4):hover .card-tags span {
+  border-color: rgba(0, 210, 255, 0.45);
+  color: var(--accent-blue);
+  background: rgba(0, 210, 255, 0.1);
+}
+
+/* ==========================================================================
+   Portfolio Section — 3D Coverflow Experience
+   ========================================================================== */
+#portfolio {
+  position: relative;
+  overflow: visible;
+}
+
+.portfolio-coverflow-container {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* ==========================================================================
+   Contact Form — Obsidian Dark Glass Enclosure
+   ========================================================================== */
+form {
+  display: grid;
+  gap: 1.2rem;
+  max-width: 660px;
+  background: rgba(10, 10, 18, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 2.5rem;
+  border-radius: 24px;
+  border: 1px solid var(--border-line);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 46, 147, 0.08), 0 0 60px rgba(139, 92, 246, 0.06);
+}
+
+label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--mute);
+  font-size: 0.95rem;
+}
+
+input, select, textarea {
+  background: rgba(4, 5, 10, 0.75);
+  border: 1px solid var(--border-line);
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+  color: var(--ink);
+  font: inherit;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  background: rgba(16, 18, 30, 0.95);
+  box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.22), 0 0 25px rgba(139, 92, 246, 0.22);
+}
+
+form .btn {
+  justify-self: start;
+}
+
+#formMsg {
+  min-height: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--accent-blue);
+}
+
+/* Footer — Crisp, Reverted Logo */
+footer {
+  padding: 3.5rem 5vw 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border-top: 1px solid var(--border-line);
+  color: var(--mute);
+  font-size: 0.95rem;
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: #FFFFFF;
+}
+
+.footer-brand .mk {
+  width: 1.6rem;
+  height: 1.6rem;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  section.swirl { padding: 8rem 6vw 4rem; }
+  #menuBtn { display: block; }
+  #menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.6rem 6vw;
+    background: rgba(0, 0, 0, 0.98);
+    border-bottom: 1px solid var(--border-line);
+  }
+  #menu.open { display: flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  section.swirl { transition: none; transform: none; opacity: 1; filter: none; }
+}

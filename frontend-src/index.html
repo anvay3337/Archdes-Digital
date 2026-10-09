@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Archdes Digital — Web. Design. Reimagined.</title>
+    <meta name="description" content="Archdes Digital designs and builds premium, high-converting websites for ambitious businesses. Strategy, design, development and growth — under one roof." />
+    <meta name="theme-color" content="#07070c" />
+    <link rel="icon" type="image/png" href="/assets/archdes-logo.png" />
+    <link rel="shortcut icon" type="image/png" href="/assets/archdes-logo.png" />
+    <link rel="apple-touch-icon" href="/assets/archdes-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@500;700;800&family=Sora:wght@500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/intro.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  </head>
+  <body class="locked">
+    <!-- SMART NETWORK PRELOADER -->
+    <aside id="netLoader" aria-label="Loading Archdes Digital" aria-live="polite">
+      <canvas id="loaderThrustCanvas" class="loader-thrust-canvas"></canvas>
+      <div class="loader-rocket-group" id="loaderRocketGroup">
+        <div class="loader-glow-wrapper">
+          <div class="loader-glow-aura"></div>
+          <div class="loader-circular-ring"></div>
+          <div class="loader-logo-core">
+            <img id="loaderimg" alt="Archdes Digital" src="/assets/archdes-logo.png" />
+          </div>
+        </div>
+        <div class="loader-thrust-beam" id="loaderThrustBeam"></div>
+        <div class="loader-caption" id="loaderCaption">
+          <span>Launching Experience</span>
+          <span class="loader-dots"><span>.</span><span>.</span><span>.</span></span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MASTER CINEMATIC INTRO -->
+    <div id="intro">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="12" />
+            <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -10" />
+          </filter>
+        </defs>
+      </svg>
+
+      <div id="cam">
+        <div id="bg"></div>
+        <div id="tech"></div>
+        <canvas id="liq"></canvas>
+        <svg class="brush" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+          <path pathLength="1" d="M-20 170 C200 90 380 240 560 150 S880 120 1040 170" />
+        </svg>
+
+        <div class="w" id="w1"><span>WEB<i>.</i></span></div>
+        <div class="w" id="w2"><span>DESIGN<i>.</i></span></div>
+        <div class="w" id="w3"><span>REIMAGINED<i>.</i></span></div>
+
+        <div class="scene">
+          <div class="rig" id="rig">
+            <div class="orbit" id="o1"></div>
+            <div class="orbit" id="o2"></div>
+            <div class="chip c1">&lt;/&gt; clean code</div>
+            <div class="chip c2">3D &middot; motion</div>
+            <div class="chip c3">UI / UX</div>
+            <div class="chip c4">+240% leads</div>
+            <div class="bezel">
+              <div class="screen" id="screen">
+                <div class="chrome"><i></i><i></i><i></i><b id="url">archdes.digital</b></div>
+                <div class="m-nav">
+                  <div style="display:flex;align-items:center;gap:.5em">
+                    <img id="navmark" src="/assets/archdes-logo.png" alt="" style="height:1.5em" /> Archdes
+                  </div>
+                  <div>
+                    <span>Work</span>
+                    <span>About</span>
+                    <a class="m-btn" id="cta">Let's talk</a>
+                  </div>
+                </div>
+                <div class="scroll" id="scroll">
+                  <div class="m-hero">
+                    <small>NEXT-GEN WEB STUDIO</small>
+                    <h3>We build websites people remember.</h3>
+                  </div>
+                  <div class="m-cards"><div></div><div></div><div></div></div>
+                  <div class="m-chart">
+                    <i style="--h:30%"></i><i style="--h:55%"></i><i style="--h:42%"></i>
+                    <i style="--h:75%"></i><i style="--h:60%"></i><i style="--h:90%"></i>
+                    <i style="--h:70%"></i><i style="--h:100%"></i>
+                  </div>
+                  <div class="m-cards"><div></div><div></div><div></div></div>
+                </div>
+                <svg class="cur" id="cur" viewBox="0 0 24 24">
+                  <path d="M3 2l16 9-7 2 4 8-3 1-4-8-6 5z" fill="#fff" stroke="#030720" stroke-width="1.2" />
+                </svg>
+                <div class="glare" id="glare"></div>
+              </div>
+            </div>
+            <div class="neck"></div>
+            <div class="base"></div>
+          </div>
+        </div>
+
+        <div class="shock" id="shock"></div>
+        <div class="logo" id="logo">
+          <div class="lock">
+            <div class="mark" id="mark">
+              <img id="logoimg" alt="Archdes Digital logo mark" src="/assets/archdes-logo.png" />
+            </div>
+            <div class="txt">
+              <div class="word" id="word"></div>
+              <div class="sub" id="sub">DIGITAL</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flash" id="flash"></div>
+        <div class="grain"></div>
+        <div class="scratch"></div>
+        <div class="vig"></div>
+        <div class="hud" id="h1">ARCHDES // DIGITAL</div>
+        <div class="hud" id="h2">EST. 2026</div>
+        <div id="bar"></div>
+      </div>
+
+      <button id="skip" class="skip-btn" aria-label="Skip introduction">SKIP <span>&gt;&gt;</span></button>
+    </div>
+
+    <!-- MAIN WEBSITE ROOT -->
+    <div id="root"></div>
+
+    <script type="module" src="/src/main.tsx"></script>
+    <script src="/js/intro.js"></script>
+  </body>
+</html>

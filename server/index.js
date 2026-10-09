@@ -154,7 +154,7 @@ ${businessName}`,
         </div>`,
     });
 
-    // Notification to you
+    // Notification to admin
     await transporter.sendMail({
       from: `"Website Enquiries" <${process.env.FROM_EMAIL}>`,
       to: process.env.NOTIFY_EMAIL,
@@ -163,9 +163,15 @@ ${businessName}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     });
 
-    res.redirect("/thank-you.html"); // or: res.json({ ok: true });
+    if (req.headers.accept?.includes('application/json') || req.is('application/json')) {
+      return res.json({ ok: true, message: "Enquiry sent successfully" });
+    }
+    res.redirect("/thank-you.html");
   } catch (err) {
     console.error("Email error:", err);
+    if (req.headers.accept?.includes('application/json') || req.is('application/json')) {
+      return res.status(500).json({ error: "Could not send your enquiry. Please try again." });
+    }
     res.status(500).send("Could not send your enquiry. Please try again.");
   }
 });
