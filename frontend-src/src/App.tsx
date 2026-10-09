@@ -33,9 +33,9 @@ export default function App() {
 
     window.addEventListener("archdes:enter-site", onEnter);
 
-    // Fallback: If intro doesn't exist or is already done
+    // Only set ready if intro element is marked as out
     const introEl = document.getElementById("intro");
-    if (!introEl || introEl.classList.contains("out") || introEl.style.display === "none") {
+    if (introEl && introEl.classList.contains("out")) {
       setReady(true);
     }
 

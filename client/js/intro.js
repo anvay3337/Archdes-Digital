@@ -159,19 +159,16 @@
   }
 
   function completeLoadingAndPlay(onReady) {
-    if (!hasSeenPreloader && loaderEl && loaderEl.style.display !== 'none') {
-      setFlag('archdes_preloader_seen', '1');
+    if (loaderEl && loaderEl.style.display !== 'none') {
       const start = window.__archdesPreloaderStart || Date.now();
       const elapsed = Date.now() - start;
-      const targetDuration = 3000; // exactly 3 seconds for first-time display
+      const targetDuration = 2000;
       const waitTime = Math.max(0, targetDuration - elapsed);
 
       setTimeout(() => {
         triggerRocketLaunchTransition(onReady);
       }, waitTime);
     } else {
-      if (loaderEl) loaderEl.style.display = 'none';
-      setFlag('archdes_preloader_seen', '1');
       onReady();
     }
   }
@@ -477,11 +474,7 @@
       });
     }
 
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(launch);
-    } else {
-      launch();
-    }
+    launch();
 
     // Global restart function for navbar logo clicks
     window.restartIntro = function () {
