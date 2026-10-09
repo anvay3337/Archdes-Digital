@@ -1,0 +1,11 @@
+# Security Policy for Archdes Digital
+# https://archdes.digital/.well-known/security.txt
+
+Contact: mailto:security@archdes.digital
+Contact: mailto:archdesdigital@gmail.com
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://archdes.digital/.well-known/security.txt
+Policy: https://archdes.digital/security
+Acknowledgments: https://archdes.digital/security#hall-of-fame
+Hiring: https://archdes.digital/careers

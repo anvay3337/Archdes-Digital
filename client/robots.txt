@@ -1,0 +1,10 @@
+# Robots.txt for Archdes Digital
+# https://archdes.digital
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /enquiry
+
+# Sitemap
+Sitemap: https://archdes.digital/sitemap.xml

@@ -2,7 +2,8 @@
   "name": "archdes-digital",
   "version": "1.0.0",
   "scripts": {
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "test": "node test/security.test.js"
   },
   "dependencies": {
     "dotenv": "^18.0.6",
