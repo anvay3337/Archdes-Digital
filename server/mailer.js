@@ -1,23 +1,28 @@
 const nodemailer = require('nodemailer');
 
-const RECIPIENT_EMAIL = process.env.CONTACT_EMAIL || 'archdesdigital@gmail.com';
-
-const DEFAULT_USER = 'archdesdigital@gmail.com';
-const DEFAULT_PASS = 'pcidegpvdkbzqmmq';
+const RECIPIENT_EMAIL = (process.env.NOTIFY_EMAIL || process.env.CONTACT_EMAIL || 'archdesdigital@gmail.com').trim();
 
 /**
- * Creates an SMTP transporter using environment variables or configured defaults.
- * Compatible with Gmail App Passwords, Resend SMTP, SendGrid, or generic SMTP providers.
+ * Sanitizes header values to prevent SMTP/Email Header Injection (CRLF / %0A / %0D injection)
+ */
+function sanitizeHeader(val) {
+  if (typeof val !== 'string') return '';
+  return val.replace(/[\r\n\t%]/g, '').trim();
+}
+
+/**
+ * Creates an SMTP transporter using environment variables.
+ * Compatible with Gmail App Passwords, Resend SMTP, SendGrid, Amazon SES, or custom SMTP servers.
  */
 function getTransporter() {
-  const rawUser = process.env.EMAIL_USER || process.env.SMTP_USER || process.env.GMAIL_USER || DEFAULT_USER;
-  const rawPass = process.env.EMAIL_PASS || process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD || DEFAULT_PASS;
+  const rawUser = process.env.SMTP_USER || process.env.EMAIL_USER || process.env.GMAIL_USER || '';
+  const rawPass = process.env.SMTP_PASS || process.env.EMAIL_PASS || process.env.GMAIL_APP_PASSWORD || '';
   
   const user = rawUser ? rawUser.trim() : '';
   const pass = rawPass ? rawPass.replace(/\s+/g, '') : '';
   const host = process.env.SMTP_HOST || 'smtp.gmail.com';
   const port = parseInt(process.env.SMTP_PORT || '465', 10);
-  const secure = process.env.SMTP_SECURE !== 'false' && (port === 465);
+  const secure = process.env.SMTP_SECURE !== 'false' && (port === 465 || port === 587);
 
   if (!user || !pass) {
     return null;
@@ -40,20 +45,23 @@ function getTransporter() {
 }
 
 /**
- * Sends inquiry email in JSON format to archdesdigital@gmail.com
+ * Sends inquiry email in JSON format
  * @param {Object} payload Sanitized submission payload
  */
 async function sendInquiryEmail(payload) {
   const jsonString = JSON.stringify(payload, null, 2);
   const transporter = getTransporter();
 
-  const senderUser = (process.env.EMAIL_USER || process.env.SMTP_USER || process.env.GMAIL_USER || DEFAULT_USER).trim();
+  const senderUser = (process.env.SMTP_USER || process.env.EMAIL_USER || process.env.FROM_EMAIL || 'inquiries@archdes.digital').trim();
+  const safeClientName = sanitizeHeader(payload.name || 'Client');
+  const safeClientEmail = sanitizeHeader(payload.email || '');
+  const safeBudget = sanitizeHeader(payload.budget || 'Not specified');
 
   const mailOptions = {
-    from: `"Archdes Digital Inquiries" <${senderUser}>`,
-    to: RECIPIENT_EMAIL,
-    replyTo: payload.email,
-    subject: `[New Inquiry] ${payload.name} (${payload.budget})`,
+    from: `"${sanitizeHeader(process.env.BUSINESS_NAME || 'Archdes Digital Inquiries')}" <${sanitizeHeader(senderUser)}>`,
+    to: sanitizeHeader(RECIPIENT_EMAIL),
+    replyTo: safeClientEmail || undefined,
+    subject: `[New Inquiry] ${safeClientName} (${safeBudget})`,
     text: `New project inquiry received:\n\n${jsonString}`,
     html: `
       <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 640px; margin: 0 auto; background: #06070b; color: #f1f5f9; padding: 28px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12);">
