@@ -418,7 +418,7 @@ export function Footer() {
         { label: "Behance", href: "https://www.behance.net/archdesdigital", isExt: true },
         { label: "Dribbble", href: "https://dribbble.com/archdes-digital", isExt: true },
         { label: "X / Twitter", href: "https://x.com/ArchdesDigital", isExt: true },
-        { label: "LinkedIn", href: "#", isExt: false },
+        { label: "LinkedIn", href: "https://www.linkedin.com/company/archdes-digtal/", isExt: true },
       ],
     },
     {

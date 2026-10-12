@@ -170,7 +170,7 @@ export default function Navbar({ ready }: { ready: boolean }) {
                   { n: "Behance", u: "https://www.behance.net/archdesdigital" },
                   { n: "Dribbble", u: "https://dribbble.com/archdes-digital" },
                   { n: "X / Twitter", u: "https://x.com/ArchdesDigital" },
-                  { n: "LinkedIn", u: "#" },
+                  { n: "LinkedIn", u: "https://www.linkedin.com/company/archdes-digtal/" },
                 ].map((s) => (
                   <a
                     tabIndex={open ? 0 : -1}
