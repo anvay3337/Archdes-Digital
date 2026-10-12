@@ -7,12 +7,16 @@ export function Kinetic() {
   const r1 = useRef<HTMLDivElement>(null);
   const r2 = useRef<HTMLDivElement>(null);
   useScrollProgress(section, (p) => {
-    if (r1.current) r1.current.style.transform = `translateX(${-10 - p * 30}%)`;
-    if (r2.current) r2.current.style.transform = `translateX(${-40 + p * 30}%)`;
+    if (r1.current) r1.current.style.transform = `translateX(${-12 - p * 28}%)`;
+    if (r2.current) r2.current.style.transform = `translateX(${-38 + p * 28}%)`;
   });
   const words = ["Strategy", "Design", "Development", "Motion", "SEO", "Growth"];
   return (
-    <section ref={section} aria-hidden className="relative overflow-hidden py-20 sm:py-28 lg:py-32 flex flex-col justify-center">
+    <section
+      ref={section}
+      aria-hidden
+      className="relative overflow-hidden min-h-[85vh] sm:min-h-screen flex flex-col justify-center pt-28 pb-14 sm:pt-36 sm:pb-18 lg:pt-44 lg:pb-20"
+    >
       <div ref={r1} className="flex w-max gap-10 whitespace-nowrap will-change-transform">
         {[...words, ...words, ...words].map((w, i) => (
           <span key={i} className={i % 2 ? "outline-text font-display text-[16vw] font-semibold leading-none tracking-[-0.05em] sm:text-[10vw]" : "font-display text-[16vw] font-semibold leading-none tracking-[-0.05em] text-zinc-200 sm:text-[10vw]"}>
@@ -21,7 +25,7 @@ export function Kinetic() {
           </span>
         ))}
       </div>
-      <div ref={r2} className="mt-4 sm:mt-6 flex w-max gap-10 whitespace-nowrap will-change-transform">
+      <div ref={r2} className="mt-6 sm:mt-8 flex w-max gap-10 whitespace-nowrap will-change-transform">
         {[...words, ...words, ...words].reverse().map((w, i) => (
           <span key={i} className={i % 2 === 0 ? "outline-text font-serif text-[16vw] italic leading-none sm:text-[10vw]" : "iri font-serif text-[16vw] italic leading-none sm:text-[10vw]"}>
             {w}
