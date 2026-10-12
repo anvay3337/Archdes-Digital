@@ -47,7 +47,7 @@ export default function Hero({ ready }: { ready: boolean }) {
           </h1>
 
           <div className="mt-8 flex flex-col gap-6 border-t border-white/10 pt-6 md:flex-row md:items-end md:justify-between">
-            <p className={cn("max-w-md text-[15px] leading-relaxed text-zinc-400 transition-all duration-1000", ready ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0")} style={show(600)}>
+            <p className={cn("max-w-md text-[15px] leading-relaxed text-zinc-200 transition-all duration-1000", ready ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0")} style={show(600)}>
               Archdes Digital is an independent web design studio crafting immersive, high-converting websites for ambitious businesses — where cinematic design meets measurable growth.
             </p>
             <div className={cn("flex items-center gap-3 transition-all duration-1000", ready ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0")} style={show(750)}>

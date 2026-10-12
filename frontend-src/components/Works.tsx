@@ -28,20 +28,20 @@ export const projects = [
     ml: "Spatial Architecture",
   },
   {
-    name: "HOA Client Portal",
-    cat: "Architectural Ecosystem & Web App",
-    year: "2025",
-    img: "/assets/portfolio/hoa-portal-intro.png",
-    metric: "3D App",
-    ml: "Interactive Client Portal",
-  },
-  {
     name: "AnvAI Spatial Engine",
     cat: "AI-Driven Generative Architecture",
     year: "2024",
     img: "/assets/portfolio/anvai-intro.png",
     metric: "AI 3D",
     ml: "Algorithmic Geometry",
+  },
+  {
+    name: "HOA Client Portal",
+    cat: "Architectural Ecosystem & Web App",
+    year: "2025",
+    img: "/assets/portfolio/hoa-portal-intro.png",
+    metric: "3D App",
+    ml: "Interactive Client Portal",
   },
   {
     name: "AMR Analyst AI",
@@ -101,18 +101,17 @@ export default function Works() {
       <div className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden">
         <div className="pointer-events-none absolute left-1/4 top-1/3 h-[50vh] w-[50vw] rounded-full bg-indigo-600/10 blur-[140px]" aria-hidden />
 
-        <div ref={track} className="flex w-max items-center gap-6 pl-5 pr-[10vw] will-change-transform sm:gap-10 sm:pl-8">
+        <div ref={track} className="flex w-max items-center gap-6 pl-6 pr-[10vw] will-change-transform sm:gap-10 sm:pl-12 lg:pl-16">
           {/* intro */}
           <div className="flex w-[85vw] shrink-0 flex-col justify-center sm:w-[60vw] lg:w-[45vw]">
             <div className="flex items-center gap-3 text-zinc-400">
-              <span className="label text-zinc-500">(01)</span>
               <span className="h-px w-10 bg-zinc-700" />
-              <span className="label">Selected works 2023 — 2025</span>
+              <span className="label uppercase tracking-widest text-zinc-400">Selected works 2023 — 2025</span>
             </div>
             <h2 className="mt-6 font-display text-[22vw] font-semibold leading-[0.82] tracking-[-0.06em] sm:text-[14vw] lg:text-[11vw]">
               Wor<Serif className="iri">ks</Serif>
             </h2>
-            <p className="mt-8 max-w-sm text-zinc-400">
+            <p className="mt-8 max-w-sm text-zinc-200">
               A curated selection of websites we've designed and engineered for brands that refuse to blend in. Keep scrolling →
             </p>
           </div>
@@ -178,12 +177,10 @@ export default function Works() {
         </div>
 
         {/* progress */}
-        <div className="absolute inset-x-5 bottom-8 flex items-center gap-4 sm:inset-x-8">
-          <span className="label tabular-nums text-zinc-400">0{idx}</span>
+        <div className="absolute inset-x-5 bottom-8 flex items-center sm:inset-x-8">
           <div className="h-px flex-1 bg-white/10">
             <div ref={bar} className="h-full origin-left bg-bone" style={{ transform: "scaleX(0)" }} />
           </div>
-          <span className="label tabular-nums text-zinc-600">0{projects.length}</span>
         </div>
       </div>
     </section>

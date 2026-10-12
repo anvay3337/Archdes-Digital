@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "../utils/cn";
 import { Magnetic } from "./ui";
+import { CONTACT_CONFIG, getWhatsAppUrl } from "../config/contact";
 
 const links = [
   { label: "Works", href: "#works" },
@@ -92,7 +93,9 @@ export default function Navbar({ ready }: { ready: boolean }) {
           <div className="flex items-center gap-2">
             <Magnetic className="hidden sm:inline-block">
               <a
-                href="#contact"
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-white/15 px-4 py-2 text-sm font-medium transition-colors duration-500 hover:text-ink"
               >
                 <span className="absolute inset-0 translate-y-full rounded-full bg-bone transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
@@ -153,7 +156,11 @@ export default function Navbar({ ready }: { ready: boolean }) {
           <div className={cn("mt-14 grid grid-cols-2 gap-8 transition-all duration-700 lg:mt-0 lg:grid-cols-1", open ? "opacity-100 delay-700" : "opacity-0")}>
             <div>
               <p className="label text-zinc-600">New business</p>
-              <a tabIndex={open ? 0 : -1} href="mailto:hello@archdes.digital" className="mt-2 block text-lg hover:text-violet-300">hello@archdes.digital</a>
+              <a tabIndex={open ? 0 : -1} href={`mailto:${CONTACT_CONFIG.email}`} className="mt-2 block text-lg hover:text-violet-300">{CONTACT_CONFIG.email}</a>
+              <div className="mt-3 flex flex-col gap-1 text-sm text-zinc-400 font-mono">
+                <a tabIndex={open ? 0 : -1} href={getWhatsAppUrl(undefined, CONTACT_CONFIG.whatsappNumber)} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-300">{CONTACT_CONFIG.whatsappNumber}</a>
+                <a tabIndex={open ? 0 : -1} href={getWhatsAppUrl(undefined, CONTACT_CONFIG.whatsappNumberSecondary)} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-300">{CONTACT_CONFIG.whatsappNumberSecondary}</a>
+              </div>
             </div>
             <div>
               <p className="label text-zinc-600">Follow</p>

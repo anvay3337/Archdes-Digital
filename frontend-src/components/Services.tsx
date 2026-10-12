@@ -67,7 +67,7 @@ export function Services() {
   }, []);
 
   return (
-    <section id="services" className="relative py-24 sm:py-36">
+    <section id="services" className="relative py-20 sm:py-28 lg:py-32">
       <div className="mx-auto w-full max-w-[1800px] px-6 sm:px-12 lg:px-16">
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <div>
@@ -78,7 +78,7 @@ export function Services() {
             />
           </div>
           <Reveal delay={200}>
-            <p className="max-w-sm text-zinc-400">
+            <p className="max-w-sm text-zinc-200">
               One senior team covering every discipline your website needs — from first sketch to final deploy, and every optimization after.
             </p>
           </Reveal>
@@ -118,10 +118,10 @@ export function Services() {
                 <div id={`svc-${i}`} role="region" className={cn("grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]", isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}>
                   <div className="overflow-hidden">
                     <div className="grid gap-6 pb-10 pl-16 sm:grid-cols-2">
-                      <p className="max-w-lg text-lg leading-relaxed text-zinc-400">{s.d}</p>
+                      <p className="max-w-lg text-lg leading-relaxed text-zinc-100">{s.d}</p>
                       <div className="flex flex-wrap content-start gap-2">
                         {s.tags.map((t) => (
-                          <span key={t} className="glass rounded-full px-4 py-2 text-sm text-zinc-300">{t}</span>
+                          <span key={t} className="glass rounded-full px-4 py-2 text-sm text-zinc-200">{t}</span>
                         ))}
                       </div>
                     </div>
@@ -176,7 +176,7 @@ export function Process() {
                 lines={["From idea", <>to <Serif className="iri">impact</Serif></>, "in 4 weeks."]}
               />
               <Reveal delay={200}>
-                <p className="mt-8 max-w-sm text-zinc-400">
+                <p className="mt-8 max-w-sm text-zinc-200">
                   A proven, transparent process with a dedicated senior team, fixed pricing and zero surprises. You're involved at every milestone.
                 </p>
               </Reveal>
@@ -197,7 +197,7 @@ export function Process() {
                         <h3 className="font-display text-4xl font-semibold tracking-[-0.04em] sm:text-6xl">{s.t}</h3>
                         <span className="outline-text font-display text-7xl font-semibold leading-none sm:text-9xl" aria-hidden>{s.n}</span>
                       </div>
-                      <p className="mt-6 max-w-lg text-zinc-400">{s.d}</p>
+                      <p className="mt-6 max-w-lg text-zinc-100">{s.d}</p>
                     </div>
                   </article>
                 </Reveal>

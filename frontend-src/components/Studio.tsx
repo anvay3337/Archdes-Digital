@@ -12,7 +12,7 @@ export function Kinetic() {
   });
   const words = ["Strategy", "Design", "Development", "Motion", "SEO", "Growth"];
   return (
-    <section ref={section} aria-hidden className="relative overflow-hidden py-16 sm:py-24">
+    <section ref={section} aria-hidden className="relative overflow-hidden py-20 sm:py-28 lg:py-32 flex flex-col justify-center">
       <div ref={r1} className="flex w-max gap-10 whitespace-nowrap will-change-transform">
         {[...words, ...words, ...words].map((w, i) => (
           <span key={i} className={i % 2 ? "outline-text font-display text-[16vw] font-semibold leading-none tracking-[-0.05em] sm:text-[10vw]" : "font-display text-[16vw] font-semibold leading-none tracking-[-0.05em] text-zinc-200 sm:text-[10vw]"}>
@@ -21,7 +21,7 @@ export function Kinetic() {
           </span>
         ))}
       </div>
-      <div ref={r2} className="mt-2 flex w-max gap-10 whitespace-nowrap will-change-transform">
+      <div ref={r2} className="mt-4 sm:mt-6 flex w-max gap-10 whitespace-nowrap will-change-transform">
         {[...words, ...words, ...words].reverse().map((w, i) => (
           <span key={i} className={i % 2 === 0 ? "outline-text font-serif text-[16vw] italic leading-none sm:text-[10vw]" : "iri font-serif text-[16vw] italic leading-none sm:text-[10vw]"}>
             {w}
@@ -136,7 +136,7 @@ export function Vision() {
               ]}
             />
             <Reveal delay={300}>
-              <p className="mt-10 max-w-xl text-lg leading-relaxed text-zinc-400">
+              <p className="mt-10 max-w-xl text-lg leading-relaxed text-zinc-200">
                 Your website is the first handshake with every customer. We make sure it's unforgettable — and that it quietly works around the clock to fill your pipeline.
               </p>
             </Reveal>

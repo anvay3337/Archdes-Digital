@@ -41,18 +41,6 @@
       ],
     },
     {
-      src: "assets/portfolio/hoa-portal-intro.png",
-      alt: "HOA Client Portal architectural web application",
-      title: "HOA Client Portal",
-      subtitle: "Architectural Ecosystem & Web App",
-      year: "2025",
-      meta: [
-        { label: "Discipline", value: "Digital Architecture & UI/UX" },
-        { label: "Year", value: "2025" },
-        { label: "Scope", value: "Interactive 3D Client Experience" },
-      ],
-    },
-    {
       src: "assets/portfolio/anvai-intro.png",
       alt: "AnvAI Generative spatial architecture engine",
       title: "AnvAI Spatial Engine",
@@ -62,6 +50,18 @@
         { label: "Discipline", value: "Computational Architecture & AI" },
         { label: "Year", value: "2024" },
         { label: "Scope", value: "Real-Time Algorithmic Geometry" },
+      ],
+    },
+    {
+      src: "assets/portfolio/hoa-portal-intro.png",
+      alt: "HOA Client Portal architectural web application",
+      title: "HOA Client Portal",
+      subtitle: "Architectural Ecosystem & Web App",
+      year: "2025",
+      meta: [
+        { label: "Discipline", value: "Digital Architecture & UI/UX" },
+        { label: "Year", value: "2025" },
+        { label: "Scope", value: "Interactive 3D Client Experience" },
       ],
     },
     {

@@ -3,6 +3,8 @@ import { ArrowLeft, ArrowRight, ArrowUp, ArrowUpRight, Check, CheckCircle2, Plus
 import { cn } from "../utils/cn";
 import { LineReveal, Magnetic, Reveal, SectionLabel, Serif, useScrollProgress } from "./ui";
 import { Logo } from "./Navbar";
+import { CONTACT_CONFIG, getWhatsAppUrl } from "../config/contact";
+import { LegalModal, type LegalDocType } from "./LegalModal";
 
 /* ---------------- Testimonials ---------------- */
 const voices = [
@@ -168,12 +170,12 @@ const faqs = [
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="relative py-24 sm:py-36">
+    <section id="faq" className="relative py-20 sm:py-28 lg:py-32">
       <div className="mx-auto grid w-full max-w-[1800px] gap-14 px-6 sm:px-12 lg:grid-cols-12 lg:px-16">
         <div className="lg:col-span-5">
           <SectionLabel n="08">FAQ</SectionLabel>
           <LineReveal className="mt-8 font-display text-5xl font-semibold leading-[0.92] tracking-[-0.05em] sm:text-7xl" lines={["Questions,", <><Serif className="iri">answered.</Serif></>]} />
-          <Reveal delay={200}><p className="mt-8 max-w-sm text-zinc-400">Can't find what you need? <a href="#contact" className="text-bone underline underline-offset-4">Talk to a human</a> — we reply within 24 hours.</p></Reveal>
+          <Reveal delay={200}><p className="mt-8 max-w-sm text-zinc-200">Can't find what you need? <a href="#contact" className="text-bone underline underline-offset-4 hover:text-white">Talk to a human</a> — we reply within 24 hours.</p></Reveal>
         </div>
         <div className="border-t border-white/10 lg:col-span-7">
           {faqs.map((f, i) => {
@@ -182,12 +184,12 @@ export function FAQ() {
               <Reveal key={f.q} delay={i * 60} className="border-b border-white/10">
                 <h3>
                   <button id={`fq-${i}`} aria-expanded={isOpen} aria-controls={`fa-${i}`} onClick={() => setOpen(isOpen ? null : i)} className="group flex w-full items-center justify-between gap-6 py-7 text-left">
-                    <span className="font-display text-xl font-medium tracking-tight transition-transform duration-500 group-hover:translate-x-2 sm:text-2xl">{f.q}</span>
+                    <span className="font-display text-xl font-medium tracking-tight text-white transition-transform duration-500 group-hover:translate-x-2 sm:text-2xl">{f.q}</span>
                     <span className={cn("grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/15 transition-all duration-500", isOpen && "rotate-45 bg-bone text-ink")}><Plus className="h-4 w-4" /></span>
                   </button>
                 </h3>
                 <div id={`fa-${i}`} role="region" aria-labelledby={`fq-${i}`} className={cn("grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]", isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}>
-                  <div className="overflow-hidden"><p className="max-w-2xl pb-8 text-lg leading-relaxed text-zinc-400">{f.a}</p></div>
+                  <div className="overflow-hidden"><p className="max-w-2xl pb-8 text-lg leading-relaxed text-zinc-100 font-normal">{f.a}</p></div>
                 </div>
               </Reveal>
             );
@@ -264,7 +266,7 @@ export function Contact() {
     );
 
   return (
-    <section id="contact" className="relative overflow-hidden py-24 sm:py-36">
+    <section id="contact" className="relative overflow-hidden py-20 sm:py-28 lg:py-32">
       <div className="pointer-events-none absolute left-1/2 top-0 h-[70vh] w-[90vw] -translate-x-1/2 rounded-full bg-gradient-to-r from-violet-700/20 via-fuchsia-600/10 to-cyan-600/20 blur-[160px]" aria-hidden />
       <div className="relative mx-auto w-full max-w-[1800px] px-6 sm:px-12 lg:px-16">
         <SectionLabel n="09">Contact</SectionLabel>
@@ -276,16 +278,25 @@ export function Contact() {
         <div className="mt-20 grid gap-14 lg:grid-cols-12">
           <div className="space-y-10 lg:col-span-4">
             <Reveal>
-              <p className="text-lg leading-relaxed text-zinc-300">Tell us about your project and we'll come back within 24 hours with ideas, a timeline and a fixed-price proposal. The strategy call is on us.</p>
+              <p className="text-lg leading-relaxed text-zinc-100">Tell us about your project and we'll come back within 24 hours with ideas, a timeline and a fixed-price proposal. The strategy call is on us.</p>
             </Reveal>
             <Reveal delay={100}>
-              <p className="label font-medium text-zinc-400">Email & Direct Line</p>
-              <a href="mailto:hello@archdes.digital" className="mt-2 block font-display text-2xl font-medium tracking-tight text-white hover:text-cyan-300">hello@archdes.digital</a>
-              <a href="tel:+919876543210" className="mt-1 block font-mono text-sm tracking-wider text-cyan-400 hover:text-white">+91 98765 43210 (Direct / WhatsApp)</a>
+              <p className="label font-medium text-zinc-300">Email & Direct Lines</p>
+              <a href={`mailto:${CONTACT_CONFIG.email}`} className="mt-2 block font-display text-2xl font-medium tracking-tight text-white hover:text-cyan-300">{CONTACT_CONFIG.email}</a>
+              <div className="mt-2.5 flex flex-col gap-1.5 font-mono text-sm tracking-wider">
+                <a href={getWhatsAppUrl(undefined, CONTACT_CONFIG.whatsappNumber)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-cyan-400 hover:text-white transition">
+                  <span>{CONTACT_CONFIG.whatsappNumber}</span>
+                  <span className="text-[11px] rounded-full border border-cyan-400/30 bg-cyan-400/10 px-2 py-0.5 text-cyan-300">WhatsApp / Call</span>
+                </a>
+                <a href={getWhatsAppUrl(undefined, CONTACT_CONFIG.whatsappNumberSecondary)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-cyan-400 hover:text-white transition">
+                  <span>{CONTACT_CONFIG.whatsappNumberSecondary}</span>
+                  <span className="text-[11px] rounded-full border border-cyan-400/30 bg-cyan-400/10 px-2 py-0.5 text-cyan-300">Direct Line</span>
+                </a>
+              </div>
             </Reveal>
             <Reveal delay={200}>
-              <p className="label font-medium text-zinc-400">What happens next</p>
-              <ol className="mt-4 space-y-3 text-zinc-200">
+              <p className="label font-medium text-zinc-300">What happens next</p>
+              <ol className="mt-4 space-y-3 text-zinc-100">
                 {["Free 30-min strategy call", "Tailored proposal in 48h", "Kick-off within a week"].map((s, k) => (
                   <li key={s} className="flex items-center gap-3"><span className="label grid h-7 w-7 place-items-center rounded-full border border-white/20 bg-white/5 text-cyan-300">{k + 1}</span>{s}</li>
                 ))}
@@ -315,7 +326,7 @@ export function Contact() {
                   {[
                     { id: "name", l: "Your name", t: "text", p: "Jane Cooper", ac: "name", req: true },
                     { id: "email", l: "Work email", t: "email", p: "jane@company.com", ac: "email", req: true },
-                    { id: "phone", l: "Phone / WhatsApp", t: "tel", p: "+91 98765 43210", ac: "tel", req: false },
+                    { id: "phone", l: "Phone / WhatsApp", t: "tel", p: "+91 8700735883", ac: "tel", req: false },
                     { id: "company", l: "Company", t: "text", p: "Acme Inc.", ac: "organization", req: false },
                     { id: "site", l: "Current website", t: "url", p: "https://", ac: "url", req: false, span: 2 },
                   ].map((f) => (
@@ -377,45 +388,55 @@ export function Contact() {
 export function Footer() {
   const word = useRef<HTMLDivElement>(null);
   const foot = useRef<HTMLElement>(null);
+  const [legalDoc, setLegalDoc] = useState<LegalDocType | null>(null);
+
   useScrollProgress(foot, (p) => {
     if (word.current) word.current.style.transform = `translateY(${(1 - Math.min(1, p * 1.6)) * 40}%)`;
   });
-  const cols = [
+
+  type NavItem = {
+    label: string;
+    href?: string;
+    isExt?: boolean;
+    legalType?: LegalDocType;
+  };
+
+  const cols: { h: string; l: NavItem[] }[] = [
     {
       h: "Sitemap",
       l: [
-        ["Works", "#works", false],
-        ["Services", "#services", false],
-        ["FAQ", "#faq", false],
-        ["Contact", "#contact", false],
+        { label: "Works", href: "#works", isExt: false },
+        { label: "Services", href: "#services", isExt: false },
+        { label: "FAQ", href: "#faq", isExt: false },
+        { label: "Contact", href: "#contact", isExt: false },
       ],
     },
     {
       h: "Social",
       l: [
-        ["Instagram", "https://www.instagram.com/archdesdigital/", true],
-        ["Behance", "https://www.behance.net/archdesdigital", true],
-        ["Dribbble", "https://dribbble.com/archdes-digital", true],
-        ["X / Twitter", "https://x.com/ArchdesDigital", true],
-        ["LinkedIn", "#", false],
+        { label: "Instagram", href: "https://www.instagram.com/archdesdigital/", isExt: true },
+        { label: "Behance", href: "https://www.behance.net/archdesdigital", isExt: true },
+        { label: "Dribbble", href: "https://dribbble.com/archdes-digital", isExt: true },
+        { label: "X / Twitter", href: "https://x.com/ArchdesDigital", isExt: true },
+        { label: "LinkedIn", href: "#", isExt: false },
       ],
     },
     {
       h: "Legal",
       l: [
-        ["Privacy", "#", false],
-        ["Terms", "#", false],
-        ["Cookies", "#", false],
+        { label: "Privacy Policy", legalType: "privacy" },
+        { label: "Terms of Service", legalType: "terms" },
+        { label: "Cookie Policy", legalType: "cookies" },
       ],
     },
   ];
   return (
-    <footer ref={foot} className="relative overflow-hidden border-t border-white/10 pt-20">
+    <footer ref={foot} className="relative overflow-hidden border-t border-white/10 pt-20 sm:pt-28 lg:pt-32 pb-0">
       <div className="mx-auto w-full max-w-[1800px] px-6 sm:px-12 lg:px-16">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:grid-cols-12 lg:grid-cols-12 lg:gap-8 xl:gap-12">
+          <div className="col-span-2 sm:col-span-3 md:col-span-12 lg:col-span-5">
             <Logo />
-            <p className="mt-6 max-w-sm text-zinc-400">An independent web design studio building immersive, high-converting websites for ambitious businesses worldwide.</p>
+            <p className="mt-6 max-w-sm text-zinc-200">An independent web design studio building immersive, high-converting websites for ambitious businesses worldwide.</p>
             <form onSubmit={(e) => { e.preventDefault(); (e.currentTarget.querySelector("input") as HTMLInputElement).value = ""; }} className="mt-8 flex max-w-sm items-center border-b border-white/15 focus-within:border-bone">
               <label htmlFor="news" className="sr-only">Email for newsletter</label>
               <input id="news" type="email" required placeholder="Get design insights monthly" className="flex-1 bg-transparent py-3 text-sm outline-none placeholder:text-zinc-600" />
@@ -423,26 +444,37 @@ export function Footer() {
             </form>
           </div>
           {cols.map((c) => (
-            <nav key={c.h} aria-label={c.h} className="lg:col-span-2">
-              <p className="label text-zinc-600">{c.h}</p>
-              <ul className="mt-5 space-y-2.5">
-                {c.l.map(([l, h, isExt]) => (
-                  <li key={l}>
-                    <a
-                      href={h}
-                      target={isExt ? "_blank" : undefined}
-                      rel={isExt ? "noopener noreferrer" : undefined}
-                      className="group inline-flex items-center gap-1 text-zinc-300 transition hover:text-bone"
-                    >
-                      {l}
-                      <ArrowUpRight className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
-                    </a>
+            <nav key={c.h} aria-label={c.h} className="col-span-1 sm:col-span-1 md:col-span-4 lg:col-span-2">
+              <p className="label text-zinc-500 font-mono text-xs uppercase tracking-wider">{c.h}</p>
+              <ul className="mt-5 space-y-3">
+                {c.l.map((item) => (
+                  <li key={item.label}>
+                    {item.legalType ? (
+                      <button
+                        type="button"
+                        onClick={() => setLegalDoc(item.legalType!)}
+                        className="group inline-flex items-center gap-1 text-zinc-300 transition hover:text-bone cursor-pointer"
+                      >
+                        {item.label}
+                        <ArrowUpRight className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                      </button>
+                    ) : (
+                      <a
+                        href={item.href}
+                        target={item.isExt ? "_blank" : undefined}
+                        rel={item.isExt ? "noopener noreferrer" : undefined}
+                        className="group inline-flex items-center gap-1 text-zinc-300 transition hover:text-bone"
+                      >
+                        {item.label}
+                        <ArrowUpRight className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
             </nav>
           ))}
-          <div className="lg:col-span-1 lg:flex lg:justify-end">
+          <div className="col-span-2 sm:col-span-3 md:col-span-12 lg:col-span-1 lg:flex lg:justify-end">
             <a href="#top" aria-label="Back to top" className="grid h-14 w-14 place-items-center rounded-full border border-white/15 transition-all duration-500 hover:-translate-y-1 hover:bg-bone hover:text-ink">
               <ArrowUp className="h-5 w-5" />
             </a>
@@ -453,9 +485,22 @@ export function Footer() {
           <span className="label flex items-center gap-2 text-zinc-500"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />Accepting new projects</span>
         </div>
       </div>
-      <div className="overflow-hidden" aria-hidden>
-        <div ref={word} className="chrome select-none text-center font-display text-[25vw] font-semibold leading-[0.78] tracking-[-0.07em]">archdes</div>
+      <div className="overflow-hidden leading-none select-none" aria-hidden>
+        <div
+          ref={word}
+          className="chrome select-none text-center font-display text-[25vw] font-semibold leading-[0.78] tracking-[-0.07em]"
+          style={{ fontFamily: '"Plus Jakarta Sans", "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
+        >
+          archdes
+        </div>
       </div>
+
+      {/* Interactive Legal Policy Modal */}
+      <LegalModal
+        isOpen={legalDoc !== null}
+        initialDoc={legalDoc || "privacy"}
+        onClose={() => setLegalDoc(null)}
+      />
     </footer>
   );
 }

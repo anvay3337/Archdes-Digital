@@ -109,12 +109,11 @@ export function LineReveal({
   );
 }
 
-export function SectionLabel({ n, children, className }: { n: string; children: ReactNode; className?: string }) {
+export function SectionLabel({ children, className }: { n?: string; children: ReactNode; className?: string }) {
   return (
-    <Reveal className={cn("flex items-center gap-3 text-zinc-400", className)}>
-      <span className="label text-zinc-500">({n})</span>
-      <span className="h-px w-10 bg-zinc-700" />
-      <span className="label">{children}</span>
+    <Reveal className={cn("flex items-center gap-3 text-zinc-300", className)}>
+      <span className="h-px w-10 bg-zinc-600" />
+      <span className="label uppercase tracking-widest text-zinc-300 font-medium">{children}</span>
     </Reveal>
   );
 }
